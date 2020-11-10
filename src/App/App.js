@@ -6,6 +6,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
+import STORE from '../STORE';
 
 
 const findFolder = function(folders, folderId) {
@@ -27,8 +28,13 @@ class App extends Component {
     folders: []
   }
 
+  componentDidMount() {
+    setTimeout(() => this.setState(STORE), 500);
+  }
+
   renderNavRoutes() {
     const {notes, folders} = this.state;
+    
     return (
       <>
         {['/', '/folder/:folderId'].map(path => (

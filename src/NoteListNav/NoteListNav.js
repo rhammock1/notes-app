@@ -10,12 +10,15 @@ const NoteListNav = function(props) {
     <div className='NoteListNav'>
       <ul className='folder-list'>
         {props.folders.map(folder => {
-          <li key={folder.id}>
+          return (
+            <li key={folder.id}>
             <NavLink className='folder-link' to={`/folder/${folder.id}`} >
             <span>{countNotesForFolder(props.notes, folder.id)}</span>
             {folder.name}
             </NavLink>
           </li>
+          )
+          
         })}
       </ul>
       <button>Add Folder</button>
