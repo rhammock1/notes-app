@@ -6,6 +6,19 @@ import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
 
 
+const findFolder = function(folders, folderId) {
+  return folders.find(folder => folder.id === folderId);
+}
+
+const findNote = function(notes, noteId) {
+  return notes.find(note => note.id === noteId);
+}
+
+const getNotesForFolder = function(notes, folderId) {
+  return (!folderId) ? notes : notes.filter(note => note.folderId === folderId)
+}
+
+
 class App extends Component {
   state = {
     notes: [],
