@@ -2,6 +2,8 @@
 import React, { Component } from 'react';
 import {Route, Link} from 'react-router-dom';
 import NoteListMain from '../NoteListMain/NoteListMain';
+import NotePageMain from '../NotePageMain/NotePageMain';
+import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
 

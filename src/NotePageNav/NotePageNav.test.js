@@ -1,12 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import NotePageMain from './NotePageMain';
+import NotePageNav from './NotePageNav';
 import { BrowserRouter } from 'react-router-dom';
 
-describe('NotePageMain component', () => {
+describe('NotePageNav component', () => {
   it('renders without crashing', () => {
     const div = document.createElement('div');
-    ReactDOM.render(<BrowserRouter><NotePageMain />
+    ReactDOM.render(<BrowserRouter><NotePageNav />
     </BrowserRouter>, div)
   })
 })
