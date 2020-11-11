@@ -7,6 +7,7 @@ import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
 import STORE from '../STORE';
+import PropContext from '../APIContext';
 
 
 const findFolder = function(folders, folderId) {
@@ -27,37 +28,32 @@ class App extends Component {
     notes: [],
     folders: []
   }
-
-  componentDidMount() {
-    setTimeout(() => this.setState(STORE), 500);
-  }
+  
+  // componentDidMount() {
+  //   setTimeout(() => this.setState(STORE), 500);
+  // }
 
   renderNavRoutes() {
-    const {notes, folders} = this.state;
+    
     
     return (
       <>
+      <PropContext.Provider>
         {['/', '/folder/:folderId'].map(path => (
           <Route 
             exact
             key={path}
             path={path}
-            render={routeProps => (
-              <NoteListNav
-                folders={folders}
-                notes={notes}
-                {...routeProps} />
-            )} />
+            component={NoteListNav}
+           />
         ))}
         <Route  
           path='/note/:noteId'
-          render={routeProps => {
-            const {noteId} = routeProps.match.params;
-            const note = findNote(notes, noteId) || {};
-            const folder = findFolder(folders, note.folderId);
-            return <NotePageNav {...routeProps} folder={folder} />
-          }}
+          componenet={NotePageNav}
         />
+
+      </PropContext.Provider>
+        
       
 
       </>
