@@ -1,12 +1,27 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import APIContext from '../APIContext';
 import Note from '../Note/Note';
+import { getNotesForFolder } from '../helperFunctions';
 
-const NoteListMain = function(props) {
-  return (
+class NoteListMain extends React.Component {
+
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
+
+  static contextType = APIContext;
+  render() {
+    const { folderId } = this.props.match.params
+    const { notes } = this.context
+    const notesForFolder = getNotesForFolder(notes, folderId)
+
+    return (
     <section className='NoteListMain'>
       <ul>
-        {props.notes.map(note => {
+        {notesForFolder.map(note => {
           return(
             <li key={note.id}>
             <Note id={note.id} name={note.name} modified={note.modified} />
@@ -18,6 +33,8 @@ const NoteListMain = function(props) {
       <button type='button'>Add Note</button>
     </section>
     )
+  }
+  
 }
 NoteListMain.defaultProps = {
   notes:[]

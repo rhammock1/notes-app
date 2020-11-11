@@ -1,22 +1,41 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import APIContext from '../APIContext';
 
-const Note = function(props) {
-  return(
+
+class Note extends React.Component {
+  
+  static defaultProps = {
+    onDeleteNote: () => {}
+  }
+  static contextType = APIContext;
+
+  handleDeleteClick = event => {
+    event.preventDefault()
+    const noteId = this.props.id
+    console.log(noteId, 'Delete button clicked');
+    //fetch
+  }
+  
+  render() {
+    const { name, id, modified } = this.props
+    return(
     <div className='note'>
       <h2>
-        <Link to={`/note/${props.id}`}>
-          {props.name}
+        <Link to={`/note/${id}`}>
+          {name}
         </Link>
       </h2>
       <div className='buttonDate-container'>
-        <p>{props.modified}</p>
-        <button type='button'>Delete Note</button>
+        <p>{modified}</p>
+        <button type='button' onClick={this.handleDeleteClick}>Delete Note</button>
       </div>
       
 
     </div>
     )
+  }
+  
 }
 
 export default Note;

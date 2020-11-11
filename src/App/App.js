@@ -7,26 +7,20 @@ import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
 import STORE from '../STORE';
-import PropContext from '../APIContext';
+import APIContext from '../APIContext';
 
 
-const findFolder = function(folders, folderId) {
-  return folders.find(folder => folder.id === folderId);
-}
-
-const findNote = function(notes, noteId) {
-  return notes.find(note => note.id === noteId);
-}
-
-const getNotesForFolder = function(notes, folderId) {
-  return (!folderId) ? notes : notes.filter(note => note.folderId === folderId)
-}
 
 
 class App extends Component {
   state = {
     notes: [],
     folders: []
+  }
+  handleDeleteNote(noteId) {
+    this.setState({
+      notes: this.state.notes.filter(note => note.id !== noteId)
+    });
   }
   
   // componentDidMount() {
@@ -38,7 +32,7 @@ class App extends Component {
     
     return (
       <>
-      <PropContext.Provider>
+      
         {['/', '/folder/:folderId'].map(path => (
           <Route 
             exact
@@ -51,17 +45,14 @@ class App extends Component {
           path='/note/:noteId'
           componenet={NotePageNav}
         />
-
-      </PropContext.Provider>
-        
-      
-
+        <Route path='/add-folder' component={NotePageNav} />
+        <Route path='/add-note' component={NotePageNav} />
       </>
     );
   }
 
   renderMainRoutes() {
-    const {notes, folders} = this.state;
+    
     return(
       <>
         {['/', '/folder/:folderId'].map(path => (
@@ -69,36 +60,35 @@ class App extends Component {
             exact
             key={path}
             path={path}
-            render={routeProps => {
-              const {folderId} = routeProps.match.params;
-              const notesForFolder = getNotesForFolder(notes, folderId);
-              return (
-                <NoteListMain {...routeProps} notes={notesForFolder} />
-              );
-            }} />
+            component={NoteListMain}
+           />
         ))}
         <Route
           path='/note/:noteId'
-          render={routeProps => {
-            const {noteId} = routeProps.match.params;
-            const note = findNote(notes, noteId);
-            return <NotePageMain {...routeProps} note={note} />
-          }} />
+          component={NotePageMain} />
       </>
     )
   }
 
   render() {
+    const value= {
+      notes: this.state.notes,
+      folders: this.state.folders,
+      deleteNote: this.handleDeleteNote
+    };
     return(
-      <div className='App'>
-        <nav className='app-nav'>{this.renderNavRoutes()}</nav>
-        <header>
-          <h1>
-            <Link to='/'>Noteful</Link>
-          </h1>
-        </header>
-        <main className='app-main'>{this.renderMainRoutes()}</main>
-      </div>
+      <APIContext.Provider value={value}>
+        <div className='App'>
+          <nav className='app-nav'>{this.renderNavRoutes()}</nav>
+          <header>
+            <h1>
+              <Link to='/'>Noteful</Link>
+            </h1>
+          </header>
+          <main className='app-main'>{this.renderMainRoutes()}</main>
+        </div>
+      </APIContext.Provider>
+      
     )
   }
 }
