@@ -10,8 +10,13 @@ const getNotesForFolder = function(notes, folderId) {
   return (!folderId) ? notes : notes.filter(note => note.folderId === folderId)
 }
 
-export default {
+const countNotesForFolder = function(notes, folderId) {
+  return notes.filter(note => note.folderId === folderId).length
+}
+
+export {
   findFolder,
   findNote,
   getNotesForFolder,
+  countNotesForFolder
 }

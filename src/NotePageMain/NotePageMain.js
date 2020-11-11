@@ -1,21 +1,37 @@
 import React from 'react';
 import Note from '../Note/Note';
+import { findNote } from '../helperFunctions';
+import APIContext from '../APIContext';
 
-const NotePageMain = function(props) {
-  return (
+class NotePageMain extends React.Component {
+  static defaultProps = {
+    match: {
+      params: {}
+    }
+  }
+  static contextType=APIContext;
+
+  handleDeleteNote = noteId => {
+    this.props.history.push('/')
+  }
+
+  render() {
+    const { notes } = this.context
+    const { noteId } = this.props.match.params
+    const note = findNote(notes, noteId) || { content: '' }
+
+    return (
     <section className='notePageMain'>
-      <Note id={props.note.id} name={props.note.name} modified={props.note.modified} />
+      <Note id={note.id} name={note.name} modified={note.modified} onDeleteNote={this.handleDeleteNote} />
       <div className='notePageContent'>
-        <p>{props.note.content}</p>
+        <p>{note.content}</p>
       </div>
     </section>
   )
+  }
+  
 }
 
-NotePageMain.defaultProps = {
-  note: {
-    content: '',
-  }
-}
+
 
 export default NotePageMain;

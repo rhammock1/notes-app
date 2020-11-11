@@ -14,7 +14,26 @@ class Note extends React.Component {
     event.preventDefault()
     const noteId = this.props.id
     console.log(noteId, 'Delete button clicked');
-    //fetch
+    
+    fetch(`http://localhost:9090/notes/${noteId}`, {
+      method: 'DELETE',
+      headers: {
+        'content-type': 'application/json'
+      },
+    })
+    .then(res => {
+      if(!res.ok) {
+        return res.json().then(error => Promise.reject(error));
+      }
+      return res.json();
+    })
+    .then(() => {
+      this.context.deleteNote(noteId)
+      this.props.onDeleteNote(noteId)
+    })
+    .catch(error => {
+      console.error({ error });
+    })
   }
   
   render() {

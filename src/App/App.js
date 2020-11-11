@@ -17,15 +17,34 @@ class App extends Component {
     notes: [],
     folders: []
   }
-  handleDeleteNote(noteId) {
+
+  componentDidMount() {
+    let baseURL = 'http://localhost:9090';
+    Promise.all ([
+      fetch(`${baseURL}/notes`),
+      fetch(`${baseURL}/folders`)
+    ])
+    .then(([notesRes, foldersRes]) => {
+      if(!notesRes.ok) {
+        return notesRes.json().then(error => Promise.reject(error));
+      }
+      if(!foldersRes.ok) {
+        return foldersRes.json().then(error => Promise.reject(error));
+      }
+      return Promise.all([notesRes.json(), foldersRes.json()]);
+    })
+    .then(([notes, folders]) => {
+      this.setState({notes, folders});
+    })
+    .catch(error => {
+      console.error({error});
+    })
+  }
+   handleDeleteNote = noteId => {
     this.setState({
       notes: this.state.notes.filter(note => note.id !== noteId)
     });
   }
-  
-  // componentDidMount() {
-  //   setTimeout(() => this.setState(STORE), 500);
-  // }
 
   renderNavRoutes() {
     

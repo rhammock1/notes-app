@@ -3,7 +3,7 @@ import React from 'react';
 
 const APIContext = React.createContext({
   notes:[],
-  fodlers:[],
+  folders:[],
   addFolder: () => {},
   addNote: () => {},
   deleteNote: () => {},
