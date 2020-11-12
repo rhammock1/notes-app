@@ -51,7 +51,7 @@ class Note extends React.Component {
         </Link>
       </h2>
       <div className='buttonDate-container'>
-        <p>{`${hours}:${minutes} ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+        <p>{`Last modified on: ${hours}:${minutes} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
         
         }</p>
         <button type='button' onClick={this.handleDeleteClick}>Delete Note</button>
