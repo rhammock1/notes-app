@@ -14,6 +14,7 @@ class NoteListNav extends React.Component {
     return (
     <div className='NoteListNav'>
       <ul className='folder-list'>
+        <Link to='add-folder'><button>Add Folder</button></Link>
         {folders.map(folder => {
           return (
             <li key={folder.id}>
@@ -26,7 +27,7 @@ class NoteListNav extends React.Component {
           
         })}
       </ul>
-      <Link to='add-folder'><button>Add Folder</button></Link>
+      
     </div>
 
     )

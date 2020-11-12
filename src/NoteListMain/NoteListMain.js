@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import APIContext from '../APIContext';
 import Note from '../Note/Note';
 import { getNotesForFolder } from '../helperFunctions';
+import './NoteListMain.css';
 
 class NoteListMain extends React.Component {
 
@@ -21,6 +22,7 @@ class NoteListMain extends React.Component {
     return (
     <section className='NoteListMain'>
       <ul>
+        <Link to='/add-note'><button type='button'>Add Note</button></Link>
         {notesForFolder.map(note => {
           return(
             <li key={note.id}>
@@ -30,7 +32,7 @@ class NoteListMain extends React.Component {
           
         })}
       </ul>
-      <Link to='/add-note'><button type='button'>Add Note</button></Link>
+      
     </section>
     )
   }

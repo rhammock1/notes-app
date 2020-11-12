@@ -1,5 +1,7 @@
 import React from 'react';
 import APIContext from '../APIContext';
+import './AddNote.css';
+
 class AddNote extends React.Component {
   static defaultProps = {
     history: {
@@ -71,9 +73,9 @@ class AddNote extends React.Component {
         <fieldset>
           <legend>Add Note</legend>
           <label htmlFor='title'>Title</label>
-          <input type='text' required id='title' name='title' value={this.state.title.value} onChange={event => this.handleTitleChange(event.target.value)} />
+          <input type='text' required id='title' name='title' value={this.state.title.value} onChange={event => this.handleTitleChange(event.target.value)} /> <br />
           <label htmlFor='content'>Content</label>
-          <input type='text' id='content' name='content' value={this.state.content.value} onChange={event => this.handleContentChange(event.target.value)}required />
+          <input type='text' id='content' name='content' value={this.state.content.value} onChange={event => this.handleContentChange(event.target.value)}required /> <br />
           <label htmlFor='folderId'>Folder</label>
           <select id='folderId' name='folderId' required >
             <option value=''>Choose Below</option>
@@ -84,8 +86,9 @@ class AddNote extends React.Component {
               )
             })}
           </select>
+          <button type='submit'>Save</button>
         </fieldset>
-        <button type='submit'>Save</button>
+        
       </form>
       )
   }

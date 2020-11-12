@@ -6,7 +6,6 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
-import STORE from '../STORE';
 import AddFolder from '../AddFolder/AddFolder';
 import APIContext from '../APIContext';
 import AddNote from '../AddNote/AddNote';
@@ -125,10 +124,13 @@ class App extends Component {
               <Link to='/'>Noteful</Link>
             </h1>
           </header>
-          <nav className='app-nav'>{this.renderNavRoutes()}</nav>
+          <div className='nav-main'>
+            <nav className='app-nav'>{this.renderNavRoutes()}</nav>
           
-          <main className='app-main'>{this.renderMainRoutes()}</main>
+            <main className='app-main'>{this.renderMainRoutes()}</main>
         </div>
+          </div>
+          
       </APIContext.Provider>
       
     )

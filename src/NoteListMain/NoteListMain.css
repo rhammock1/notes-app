@@ -1,0 +1,13 @@
+ul {
+  list-style:none;
+  padding:0px;
+}
+li {
+  padding: 5px;
+  border:2px solid purple;
+  border-radius: 5px;
+  margin:5px;
+}
+button {
+  margin:5px 10px;
+}
