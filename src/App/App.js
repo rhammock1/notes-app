@@ -9,6 +9,7 @@ import './App.css';
 import STORE from '../STORE';
 import AddFolder from '../AddFolder/AddFolder';
 import APIContext from '../APIContext';
+import AddNote from '../AddNote/AddNote';
 
 
 
@@ -54,6 +55,13 @@ class App extends Component {
       ]
     });
   }
+  handleAddNote = newNote => {
+    this.setState({
+      notes: [
+        ...this.state.notes, newNote
+      ]
+    });
+  }
 
   renderNavRoutes() {
     
@@ -96,6 +104,7 @@ class App extends Component {
           component={NotePageMain} />
         <Route path='/add-folder' component={AddFolder} />
         <Route path='/folder/add-folder' component={AddFolder} />
+        <Route path='/add-note' component={AddNote} />
       </>
     )
   }
@@ -106,16 +115,18 @@ class App extends Component {
       folders: this.state.folders,
       deleteNote: this.handleDeleteNote,
       addFolder: this.handleAddFolder,
+      addNote: this.handleAddNote,
     };
     return(
       <APIContext.Provider value={value}>
         <div className='App'>
-          <nav className='app-nav'>{this.renderNavRoutes()}</nav>
           <header>
             <h1>
               <Link to='/'>Noteful</Link>
             </h1>
           </header>
+          <nav className='app-nav'>{this.renderNavRoutes()}</nav>
+          
           <main className='app-main'>{this.renderMainRoutes()}</main>
         </div>
       </APIContext.Provider>

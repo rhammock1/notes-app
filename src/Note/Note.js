@@ -38,6 +38,11 @@ class Note extends React.Component {
   
   render() {
     const { name, id, modified } = this.props
+    let date = new Date(modified);
+    let hours = date.getHours();
+    hours = ((hours + 11) % 12 + 1);
+    let minutes = date.getMinutes();
+    minutes = minutes < 10 ? '0' + minutes:'' + minutes;
     return(
     <div className='note'>
       <h2>
@@ -46,7 +51,9 @@ class Note extends React.Component {
         </Link>
       </h2>
       <div className='buttonDate-container'>
-        <p>{modified}</p>
+        <p>{`${hours}:${minutes} ${date.getMonth()}/${date.getDate()}/${date.getFullYear()}`
+        
+        }</p>
         <button type='button' onClick={this.handleDeleteClick}>Delete Note</button>
       </div>
       

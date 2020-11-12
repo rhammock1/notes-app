@@ -30,7 +30,7 @@ class NoteListMain extends React.Component {
           
         })}
       </ul>
-      <button type='button'>Add Note</button>
+      <Link to='/add-note'><button type='button'>Add Note</button></Link>
     </section>
     )
   }
