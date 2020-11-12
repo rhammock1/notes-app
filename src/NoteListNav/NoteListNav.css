@@ -1,0 +1,9 @@
+span {
+  font-size:10px;
+  margin-left:10px;
+  
+}
+.folder-nav {
+  display:flex;
+  justify-content:space-between;
+}

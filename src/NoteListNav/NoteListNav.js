@@ -2,6 +2,7 @@ import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
 import APIContext from '../APIContext';
 import { countNotesForFolder } from '../helperFunctions';
+import './NoteListNav.css';
 
 
 class NoteListNav extends React.Component {
@@ -17,11 +18,11 @@ class NoteListNav extends React.Component {
         <Link to='add-folder'><button>Add Folder</button></Link>
         {folders.map(folder => {
           return (
-            <li key={folder.id}>
+            <li className='folder-nav'key={folder.id}>
             <NavLink className='folder-link' to={`/folder/${folder.id}`} >
             {folder.name}
-            <span>{countNotesForFolder(notes, folder.id)}</span>
             </NavLink>
+            <span>{countNotesForFolder(notes, folder.id)}</span>
           </li>
           )
           

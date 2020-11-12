@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import APIContext from '../APIContext';
 import { findNote, findFolder } from '../helperFunctions';
+import './NotePageNav.css';
 
 
 class NotePageNav extends React.Component {
@@ -25,7 +26,7 @@ class NotePageNav extends React.Component {
     <div className='NotePageNav'>
       <Link to='/'><button>Back</button></Link>
       {folder && (
-        <h3>{folder.name}</h3>
+        <h3 className='note-page-folder'>{folder.name}</h3>
       )}
     </div>
 

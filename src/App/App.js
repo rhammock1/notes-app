@@ -76,10 +76,7 @@ class App extends Component {
             component={NoteListNav}
            />
         ))}
-        <Route  
-          path='/note/:noteId'
-          componenet={NotePageNav}
-        />
+        <Route path='/note/:noteId' component={NotePageNav} />
         <Route path='/add-folder' component={NotePageNav} />
         <Route path='/add-note' component={NotePageNav} />
       </>
@@ -128,8 +125,8 @@ class App extends Component {
             <nav className='app-nav'>{this.renderNavRoutes()}</nav>
           
             <main className='app-main'>{this.renderMainRoutes()}</main>
-        </div>
           </div>
+        </div>
           
       </APIContext.Provider>
       
