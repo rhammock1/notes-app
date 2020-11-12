@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import APIContext from '../APIContext';
 import { findNote, findFolder } from '../helperFunctions';
 
@@ -22,7 +23,7 @@ class NotePageNav extends React.Component {
     const folder = findFolder(folders, note.folderId)
     return (
     <div className='NotePageNav'>
-      <button>Back</button>
+      <Link to='/'><button>Back</button></Link>
       {folder && (
         <h3>{folder.name}</h3>
       )}

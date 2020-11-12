@@ -7,6 +7,8 @@ import { countNotesForFolder } from '../helperFunctions';
 class NoteListNav extends React.Component {
   static contextType=APIContext;
 
+
+
   render() {
     const { folders, notes } = this.context;
     return (
@@ -16,15 +18,15 @@ class NoteListNav extends React.Component {
           return (
             <li key={folder.id}>
             <NavLink className='folder-link' to={`/folder/${folder.id}`} >
-            <span>{countNotesForFolder(notes, folder.id)}</span>
             {folder.name}
+            <span>{countNotesForFolder(notes, folder.id)}</span>
             </NavLink>
           </li>
           )
           
         })}
       </ul>
-      <button>Add Folder</button>
+      <Link to='add-folder'><button>Add Folder</button></Link>
     </div>
 
     )
