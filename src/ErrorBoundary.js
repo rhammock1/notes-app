@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-class ErrorHandling extends React.Component {
+class ErrorBoundary extends React.Component {
   state = {
     hasError: false,
   }
@@ -20,8 +20,8 @@ class ErrorHandling extends React.Component {
 
   
 }
-ErrorHandling.propTypes = {
-    children: PropTypes.object
+ErrorBoundary.propTypes = {
+    children: PropTypes.array
   }
 
-export default ErrorHandling;
+export default ErrorBoundary;

@@ -78,7 +78,6 @@ class AddFolder extends React.Component {
 
   render() {
     const nameError = this.validateName();
-    console.log(nameError);
     return (
       <form className='add-folder-form' onSubmit={event => this.handleSubmitClick(event)}>
         <fieldset>
