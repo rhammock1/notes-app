@@ -1,5 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import StoreContext from '../StoreContext';
+import ValidateError from '../ValidateError';
 
 
 class AddFolder extends React.Component {
@@ -18,20 +20,37 @@ class AddFolder extends React.Component {
   state = {
     name: {
       value: '',
+      touched: false,
     },
+  }
+  validateName = () => {
+    const folderName = this.state.name.value.trim();
+    console.log(folderName);
+    if (folderName.length === 0 ) {
+      return 'Folder name is required';
+    } else if (folderName.length < 3) {
+      return 'Folder name must at least 3 characters';
+    }
   }
 
   handleFolderName = (name) => {
     
-    this.setState({name: {value: name}})
+    this.setState({name: {value: name, touched: true,}})
   }
 
   handleSubmitClick = event => {
     event.preventDefault();
-    console.log('submit button pressed');
-    const newFolder = {
-      name: this.state.name.value,
-    };
+    const nameError = this.validateName();
+    let newFolder = {}
+    if(!nameError) {
+      newFolder = {
+        name: this.state.name.value,
+        touched: true,
+        }
+    } else {
+      console.log('error')
+      return;
+    }
     
     fetch(`http://localhost:9090/folders`, {
       method: 'POST',
@@ -58,12 +77,15 @@ class AddFolder extends React.Component {
   }
 
   render() {
+    const nameError = this.validateName();
+    console.log(nameError);
     return (
       <form className='add-folder-form' onSubmit={event => this.handleSubmitClick(event)}>
         <fieldset>
           <legend>Add Folder</legend>
           <label htmlFor='name'>Folder Name: </label>
           <input type='text' id='name' name='name' value={this.state.name.value} onChange={event => this.handleFolderName(event.target.value)}  />
+          <>{this.state.name.touched && (<ValidateError message={nameError} />)}</>
           <button type='submit' >Save Folder</button>
         </fieldset>
       </form>
@@ -71,6 +93,10 @@ class AddFolder extends React.Component {
   }
 
 
+}
+
+AddFolder.propTypes = {
+  history: PropTypes.object,
 }
 
 export default AddFolder;
