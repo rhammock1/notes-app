@@ -2,6 +2,7 @@ import React from 'react';
 import Note from '../Note/Note';
 import { findNote } from '../helperFunctions';
 import StoreContext from '../StoreContext';
+import PropTypes from 'prop-types';
 
 class NotePageMain extends React.Component {
   static defaultProps = {
@@ -31,6 +32,11 @@ class NotePageMain extends React.Component {
   )
   }
   
+}
+NotePageMain.propTypes = {
+  match: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
 }
 
 

@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import StoreContext from '../StoreContext';
 import { findNote, findFolder } from '../helperFunctions';
 import './NotePageNav.css';
+import PropTypes from 'prop-types';
 
 
 class NotePageNav extends React.Component {
@@ -33,6 +34,11 @@ class NotePageNav extends React.Component {
   )
   }
   
+}
+NotePageNav.propTypes = {
+  match: PropTypes.object,
+  history: PropTypes.object,
+  location: PropTypes.object,
 }
 
 export default NotePageNav;

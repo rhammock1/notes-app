@@ -4,6 +4,7 @@ import StoreContext from '../StoreContext';
 import Note from '../Note/Note';
 import { getNotesForFolder } from '../helperFunctions';
 import './NoteListMain.css';
+import PropTypes from 'prop-types';
 
 class NoteListMain extends React.Component {
 
@@ -39,5 +40,9 @@ class NoteListMain extends React.Component {
   }
   
 }
-
+NoteListMain.propTypes = {
+  match: PropTypes.object,
+  location: PropTypes.object,
+  history: PropTypes.object,
+}
 export default NoteListMain;

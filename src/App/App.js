@@ -9,6 +9,7 @@ import './App.css';
 import AddFolder from '../AddFolder/AddFolder';
 import StoreContext from '../StoreContext';
 import AddNote from '../AddNote/AddNote';
+import ErrorBoundary from '../ErrorBoundary';
 
 
 
@@ -116,7 +117,8 @@ class App extends Component {
     return(
       <StoreContext.Provider value={value}>
         <div className='App'>
-          <header>
+          <ErrorBoundary>
+            <header>
             <h1>
               <Link to='/'>Noteful</Link>
             </h1>
@@ -126,6 +128,8 @@ class App extends Component {
           
             <main className='app-main'>{this.renderMainRoutes()}</main>
           </div>
+          </ErrorBoundary>
+          
         </div>
           
       </StoreContext.Provider>

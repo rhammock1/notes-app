@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom';
 import StoreContext from '../StoreContext';
 import { countNotesForFolder } from '../helperFunctions';
 import './NoteListNav.css';
+import PropTypes from 'prop-types';
 
 
 class NoteListNav extends React.Component {
@@ -34,6 +35,10 @@ class NoteListNav extends React.Component {
     )
   }
   
+}
+NoteListNav.propTypes = {
+  folders: PropTypes.array,
+  notes: PropTypes.array,
 }
 
 

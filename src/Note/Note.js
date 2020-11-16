@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import StoreContext from '../StoreContext';
+import PropTypes from 'prop-types'
 
 
 class Note extends React.Component {
@@ -67,6 +68,12 @@ class Note extends React.Component {
     )
   }
   
+}
+Note.propTypes = {
+  name: PropTypes.string,
+  id: PropTypes.string,
+  modified: PropTypes.string,
+  onDeleteNote: PropTypes.func,
 }
 
 export default Note;

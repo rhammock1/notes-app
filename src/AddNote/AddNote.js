@@ -1,6 +1,7 @@
 import React from 'react';
 import StoreContext from '../StoreContext';
 import ValidateError from '../ValidateError';
+import PropTypes from 'prop-types';
 import './AddNote.css';
 
 class AddNote extends React.Component {
@@ -122,6 +123,9 @@ class AddNote extends React.Component {
       </form>
       )
   }
+}
+AddNote.propTypes = {
+  history: PropTypes.object,
 }
 
 export default AddNote;
