@@ -1,5 +1,6 @@
 import React from 'react';
 import StoreContext from '../StoreContext';
+import ValidateError from '../ValidateError';
 import './AddNote.css';
 
 class AddNote extends React.Component {
@@ -13,22 +14,39 @@ class AddNote extends React.Component {
 
   state = {
     title: {
-      value: ''
+      value: '',
+      touched: false,
     },
     content: {
-      value: ''
+      value: '',
+      touched: false,
     },
+  }
+
+  validateName = () => {
+    const name = this.state.title.value.trim();
+    if (name.length === 0) {
+      return 'Name is required';
+    }
+  }
+  validateContent = () => {
+    const content = this.state.content.value.trim();
+    if(content.length === 0) {
+      return 'Content is required'
+    }
   }
 
   handleTitleChange = title => {
     this.setState({title: {
-      value: title
+      value: title,
+      touched:true,
     }})
   }
 
   handleContentChange = content => {
     this.setState({content: {
-      value: content
+      value: content,
+      touched:true,
     }})
   }
 
@@ -36,12 +54,21 @@ class AddNote extends React.Component {
 
   handleSubmitNewNote = event => {
     event.preventDefault();
-      const newNote = {
+    let nameError = this.validateName();
+    let contentError = this.validateContent();
+    let newNote = {}
+    if(!nameError && !contentError) {
+      newNote = {
         name: this.state.title.value,
         content: this.state.content.value,
         folderId: event.target['folderId'].value,
         modified: new Date(),
       }
+    } else {
+      console.log('error');
+      return;
+    }
+      
       
     
     fetch(`http://localhost:9090/notes`, {
@@ -68,20 +95,23 @@ class AddNote extends React.Component {
 
   render() {
     const {folders} = this.context
+    const nameError = this.validateName();
+    const contentError = this.validateContent();
     return(
       <form className='add-note-form' onSubmit={event => this.handleSubmitNewNote(event)}>
         <fieldset>
           <legend>Add Note</legend>
           <label htmlFor='title'>Title</label>
-          <input type='text' required id='title' name='title' value={this.state.title.value} onChange={event => this.handleTitleChange(event.target.value)} /> <br />
+          <input type='text' required id='title' name='title' value={this.state.title.value} onChange={event => this.handleTitleChange(event.target.value)} />
+          <>{this.state.title.touched && (<ValidateError message={nameError} />)}</> <br />
           <label htmlFor='content'>Content</label>
-          <input type='text' id='content' name='content' value={this.state.content.value} onChange={event => this.handleContentChange(event.target.value)}required /> <br />
+          <input type='text' id='content' name='content' value={this.state.content.value} onChange={event => this.handleContentChange(event.target.value)}required /> <>{this.state.content.touched && (<ValidateError message={contentError} />)}</><br />
           <label htmlFor='folderId'>Folder</label>
           <select id='folderId' name='folderId' required >
             <option value=''>Choose Below</option>
             {folders.map(folder => {
               return (
-                console.log(folder.id),
+                
                 <option key={folder.id} value={folder.id} >{folder.name}</option>
               )
             })}
