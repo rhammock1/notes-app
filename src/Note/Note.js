@@ -1,18 +1,23 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 
 
 class Note extends React.Component {
-  
-  static defaultProps = {
-    onDeleteNote: () => {}
+  constructor(props) {
+    super(props)
   }
-  static contextType = APIContext;
+  static defaultProps = {
+    history: {
+      push: () => {}
+    },
+  }
+  static contextType = StoreContext;
 
   handleDeleteClick = event => {
     event.preventDefault()
     const noteId = this.props.id
+    const folderId = this.props.folderId
     console.log(noteId, 'Delete button clicked');
     
     fetch(`http://localhost:9090/notes/${noteId}`, {
@@ -29,7 +34,7 @@ class Note extends React.Component {
     })
     .then(() => {
       this.context.deleteNote(noteId)
-      this.props.onDeleteNote(noteId)
+      this.props.onDeleteNote(folderId)
     })
     .catch(error => {
       console.error({ error });
@@ -54,7 +59,7 @@ class Note extends React.Component {
         <p>{`Last modified on: ${hours}:${minutes} ${date.getMonth() + 1}/${date.getDate()}/${date.getFullYear()}`
         
         }</p>
-        <button type='button' onClick={this.handleDeleteClick}>Delete Note</button>
+        <button onClick={this.handleDeleteClick}>Delete Note</button>
       </div>
       
 

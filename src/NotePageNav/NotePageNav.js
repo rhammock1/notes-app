@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 import { findNote, findFolder } from '../helperFunctions';
 import './NotePageNav.css';
 
@@ -15,7 +15,7 @@ class NotePageNav extends React.Component {
     }
   }
 
-  static contextType = APIContext;
+  static contextType = StoreContext;
 
   render() {
     const { notes, folders } = this.context;

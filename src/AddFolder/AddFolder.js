@@ -1,5 +1,5 @@
 import React from 'react';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 
 
 class AddFolder extends React.Component {
@@ -9,7 +9,7 @@ class AddFolder extends React.Component {
       push: () => {}
     },
   }
-  static contextType = APIContext;
+  static contextType = StoreContext;
 
   constructor(props) {
     super(props);

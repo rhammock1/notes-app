@@ -7,7 +7,7 @@ import NotePageNav from '../NotePageNav/NotePageNav'
 import NoteListNav from '../NoteListNav/NoteListNav';
 import './App.css';
 import AddFolder from '../AddFolder/AddFolder';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 import AddNote from '../AddNote/AddNote';
 
 
@@ -114,7 +114,7 @@ class App extends Component {
       addNote: this.handleAddNote,
     };
     return(
-      <APIContext.Provider value={value}>
+      <StoreContext.Provider value={value}>
         <div className='App'>
           <header>
             <h1>
@@ -128,7 +128,7 @@ class App extends Component {
           </div>
         </div>
           
-      </APIContext.Provider>
+      </StoreContext.Provider>
       
     )
   }

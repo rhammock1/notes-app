@@ -1,7 +1,7 @@
 import React from 'react';
 
 
-const APIContext = React.createContext({
+const StoreContext = React.createContext({
   notes:[],
   folders:[],
   addFolder: () => {},
@@ -9,4 +9,4 @@ const APIContext = React.createContext({
   deleteNote: () => {},
 })
 
-export default APIContext;
+export default StoreContext;

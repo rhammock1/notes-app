@@ -1,18 +1,19 @@
 import React from 'react';
 import Note from '../Note/Note';
 import { findNote } from '../helperFunctions';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 
 class NotePageMain extends React.Component {
   static defaultProps = {
     match: {
       params: {}
-    }
+    },
+    
   }
-  static contextType=APIContext;
+  static contextType=StoreContext;
 
-  handleDeleteNote = noteId => {
-    this.props.history.push('/')
+  handleDeleteNote = (folderId) => {
+    this.props.history.push(`/folder/${folderId}`)
   }
 
   render() {
@@ -22,7 +23,7 @@ class NotePageMain extends React.Component {
 
     return (
     <section className='notePageMain'>
-      <Note id={note.id} name={note.name} modified={note.modified} onDeleteNote={this.handleDeleteNote} />
+      <Note id={note.id} folderId={note.folderId} name={note.name} modified={note.modified} onDeleteNote={this.handleDeleteNote} />
       <div className='notePageContent'>
         <p>{note.content}</p>
       </div>

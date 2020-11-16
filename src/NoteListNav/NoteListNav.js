@@ -1,12 +1,12 @@
 import React from 'react';
 import { NavLink, Link } from 'react-router-dom';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 import { countNotesForFolder } from '../helperFunctions';
 import './NoteListNav.css';
 
 
 class NoteListNav extends React.Component {
-  static contextType=APIContext;
+  static contextType=StoreContext;
 
 
 

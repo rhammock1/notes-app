@@ -1,5 +1,5 @@
 import React from 'react';
-import APIContext from '../APIContext';
+import StoreContext from '../StoreContext';
 import './AddNote.css';
 
 class AddNote extends React.Component {
@@ -9,7 +9,7 @@ class AddNote extends React.Component {
     },
   }
 
-  static contextType=APIContext;
+  static contextType=StoreContext;
 
   state = {
     title: {
