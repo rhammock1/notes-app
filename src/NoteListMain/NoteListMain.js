@@ -23,8 +23,9 @@ class NoteListMain extends React.Component {
 
     return (
     <section className='NoteListMain'>
+      <Link to='/add-note'><button type='button'>Add Note</button></Link>
       <ul>
-        <Link to='/add-note'><button type='button'>Add Note</button></Link>
+        
         {notesForFolder.map(note => {
           return(
             <li key={note.id}>
