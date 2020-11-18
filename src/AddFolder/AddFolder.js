@@ -96,6 +96,7 @@ class AddFolder extends React.Component {
 
 AddFolder.propTypes = {
   history: PropTypes.object,
+  input: PropTypes.element.isRequired,
 }
 
 export default AddFolder;
